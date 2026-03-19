@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <nav>
+        <h1>Message Board</h1>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/post">Post Message</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Latest Messages</h2>
+        
+        <div id="message-list">
+            <% if (messages && messages.length > 0) { %>
+                <% messages.forEach(msg => { %>
+                    <div class="message-card">
+                        <div class="message-header"><%= msg.user %></div>
+                        <div class="message-body"><%= msg.text %></div>
+                        <div style="font-size: 0.8rem; text-align:right; color: #888;">
+                            <%= new Intl.DateTimeFormat('en-US', { 
+                                dateStyle: 'medium', 
+                                timeStyle: 'short' 
+                            }).format(msg.added) %>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p class="empty-state">No messages yet. Be the first to post!</p>
+            <% } %>
+        </div>
+    </div>
+
+</body>
+</html>
